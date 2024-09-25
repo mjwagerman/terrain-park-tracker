@@ -14,7 +14,14 @@ function MapComponent() {
       <>
         <ReactMapGL {...viewport}
         mapboxAccessToken={import.meta.env.VITE_MAPBOX_TOKEN}
-        mapStyle="mapbox://styles/mapbox/standard-satellite"
+        mapStyle="mapbox://styles/mapbox/streets-v11"
+        onMove={evt => { setViewport(evt.viewState);}} //update viewport on any movement
+        scrollZoom={true}
+        dragPan={true}
+        dragRotate={true}
+        doubleClickZoom={true}
+        touchZoomRotate={true}
+
         >
             markers here
         </ReactMapGL>
