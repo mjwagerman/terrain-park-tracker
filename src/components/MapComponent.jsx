@@ -1,6 +1,9 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ReactMapGL from 'react-map-gl';
+
+import { db } from "../config/firebase";
+import { getDocs, collection } from "firebase/firestore";
 
 function MapComponent() {
     const [viewport, setViewport] = useState({
@@ -10,6 +13,28 @@ function MapComponent() {
         width: '100%',
         height: '100%'
     });
+
+    const[resortList, setResortList] = useState([]);
+    
+    const resortsCollectionRef = collection(db, "resorts");
+
+    useEffect(() => {
+      const getResortList = async () => {
+        try {
+        const data = await getDocs(resortsCollectionRef);
+        const filteredData = data.docs.map((doc) => ({
+          ...doc.data(), 
+          id: doc.id,
+        }));
+        console.log(filteredData);
+        } catch(err) {
+          console.error(err);
+        }
+
+      }
+      getResortList();
+    }, []);
+
     return (
       <>
         <ReactMapGL {...viewport}
