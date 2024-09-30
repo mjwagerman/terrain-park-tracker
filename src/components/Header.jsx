@@ -1,7 +1,7 @@
 import Auth from './Auth';
 
 
-function Header() {
+const Header = () => {
   
     return (
       <div className = "header">
