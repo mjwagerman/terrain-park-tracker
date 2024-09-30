@@ -19,3 +19,11 @@ html, body, #root {
 
   height: 100%;
 }
+
+.bifg-button {
+  font-size: 50px;
+  padding: 20px;
+  background-color: 'red';
+}
+
+

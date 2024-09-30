@@ -1,38 +1,31 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import ReactMapGL from 'react-map-gl';
+import ReactMapGL, {Marker} from 'react-map-gl';
 
-import { db } from "../config/firebase";
-import { getDocs, collection } from "firebase/firestore";
+import { getResorts } from "../services/getResorts";
+
 
 function MapComponent() {
     const [viewport, setViewport] = useState({
-        latitude: 37.0,
-        longitude: -100,
+        latitude: 39.2647,
+        longitude: -120.1332,
         zoom: 8,
         width: '100%',
         height: '100%'
     });
 
-    const[resortList, setResortList] = useState([]);
-    
-    const resortsCollectionRef = collection(db, "resorts");
+    const[resortList, setResortList] = useState([ ]);
 
     useEffect(() => {
-      const getResortList = async () => {
+      const fetchResorts = async() => {
         try {
-        const data = await getDocs(resortsCollectionRef);
-        const filteredData = data.docs.map((doc) => ({
-          ...doc.data(), 
-          id: doc.id,
-        }));
-        console.log(filteredData);
-        } catch(err) {
-          console.error(err);
+          const resorts = await getResorts();
+          setResortList(resorts);
+        } catch (err) {
+          console.error(err)
         }
-
-      }
-      getResortList();
+      };
+      fetchResorts();
     }, []);
 
     return (
@@ -48,8 +41,17 @@ function MapComponent() {
         touchZoomRotate={true}
 
         >
-            markers here
-        </ReactMapGL>
+        {/* add ID as marker key below */}
+         {resortList.map((resort) => (
+          <Marker 
+          latitude={resort.location.latitude} 
+          longitude={resort.location.longitude}>
+            <button className="big-button">
+                {resort.name}
+            </button>
+          </Marker>
+          ))}
+        </ReactMapGL>  
       </>
     );
 }
