@@ -5,6 +5,8 @@ import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 import { getResorts } from "../services/getResorts";
 import PopupComponent from "./PopupComponent";
 
+import snowflake from '../assets/snowflake.png';
+
 
 const MapComponent = () => {
     const [viewport, setViewport] = useState({
@@ -60,7 +62,7 @@ const MapComponent = () => {
                 setSelectedResort(resort);
               }}
             >
-                <img src="./src/assets/snowflake.png" alt = "Snowflake Icon"/>
+                <img src={snowflake} alt = "Snowflake Icon"/>
             </button>
           </Marker>
           ))}
