@@ -17,7 +17,10 @@ html, body, #root {
 
 .map-container {
 
-  height: 100%;
+  height: 80%;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-bottom: 2rem;
 }
 
 .marker-btn {
@@ -30,3 +33,10 @@ html, body, #root {
   width: 30px;
 }
 
+.react-map-gl {
+  height:30%;
+}
+
+.popup-img {
+  height: 250px;
+}

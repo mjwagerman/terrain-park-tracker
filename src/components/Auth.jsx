@@ -15,6 +15,7 @@ const Auth = () => {
     const logout = async () => {
       try {
         await signOut(auth);
+        console.log("logged out");
       } catch (err) {
         console.error(err);
       }

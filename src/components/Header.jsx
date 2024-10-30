@@ -1,6 +1,5 @@
 import Auth from './Auth';
 
-
 const Header = () => {
   
     return (

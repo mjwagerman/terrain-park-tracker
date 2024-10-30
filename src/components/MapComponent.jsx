@@ -10,9 +10,9 @@ import snowflake from '../assets/snowflake.png';
 
 const MapComponent = () => {
     const [viewport, setViewport] = useState({
-        latitude: 39.2647,
-        longitude: -120.1332,
-        zoom: 8,
+        latitude: 40,
+        longitude: -112.1332,
+        zoom: 5,
         width: '100%',
         height: '100%',
     });
@@ -33,12 +33,9 @@ const MapComponent = () => {
       fetchResorts();
     }, []);
 
-    // const handleSelectMarker = resort => {
-    //   setSelectedResort(resort);
-    // }
-
     return (
       <>
+        
         <ReactMapGL {...viewport}
         mapboxAccessToken={import.meta.env.VITE_MAPBOX_TOKEN}
         mapStyle="mapbox://styles/mapbox/standard"
@@ -62,7 +59,7 @@ const MapComponent = () => {
                 setSelectedResort(resort);
               }}
             >
-                <img src={snowflake} alt = "Snowflake Icon"/>
+                <img src={resort.favicon} alt = "Logo"/>
             </button>
           </Marker>
           ))}
@@ -82,4 +79,4 @@ const MapComponent = () => {
 }
 
 
-export default MapComponent
+export default MapComponent;
