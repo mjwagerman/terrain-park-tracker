@@ -40,12 +40,18 @@ const InputResort = () => {
         try {
             //call the backend to puppeteer the url and return the info i want
         // const response = await Axios.get(`http://127.0.0.1:5001/terrain-park-tracker/us-central1/api/scrape?siteUrl=${newResortWebsite}`)
+
+        const inputWebsite = newResortWebsite;
+        const domain = new URL(inputWebsite).hostname.split('.').filter(part => part !== 'www')[0];
+        setNewResortWebsite("");
+
         const response = await Axios.get(functionUrl, {
             params: {
-              url: newResortWebsite,
+              url: inputWebsite,
             },
           });
        
+          
         const {title, imageSrc, favicon} = response.data;
         console.log({ title, imageSrc, favicon });
         const location = await getLocation(title);
@@ -58,7 +64,8 @@ const InputResort = () => {
             website: newResortWebsite,
             photo: imageSrc,
             favicon: favicon,
-            location: new GeoPoint(location.latitude, location.longitude)
+            location: new GeoPoint(location.latitude, location.longitude),
+            domain: domain
         });
         } catch (err) {
             console.error(err);
@@ -67,13 +74,17 @@ const InputResort = () => {
 
 
     return (
-        <>
+        <div className = "input-resort">
             <p>Is your local mountain missing? Just paste a link to their website here.</p>
             <div>
-                <input placeholder = "Resort Website" onChange={(e) => setNewResortWebsite(e.target.value)}/>
+                <input 
+                    placeholder = "Resort Website"
+                    value={newResortWebsite}
+                    onChange={(e) => setNewResortWebsite(e.target.value)}
+                />
                 <button onClick={onSubmitResort}>Submit</button>
             </div>
-        </>
+        </div>
 
         
     )

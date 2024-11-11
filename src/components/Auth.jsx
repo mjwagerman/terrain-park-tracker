@@ -22,7 +22,7 @@ const Auth = () => {
     };
   
     return (
-      <div>
+      <div className = "google-auth">
         <button onClick={signInWithGoogle}> Sign In With Google</button>
         <button onClick={logout}> Logout </button>
       </div>

@@ -34,9 +34,9 @@ const MapComponent = () => {
     }, []);
 
     return (
-      <>
-        
-        <ReactMapGL {...viewport}
+      <div className = "map-container"> 
+        <ReactMapGL 
+        {...viewport}
         mapboxAccessToken={import.meta.env.VITE_MAPBOX_TOKEN}
         mapStyle="mapbox://styles/mapbox/standard"
         onMove={evt => { setViewport(evt.viewState);}} //update viewport on any movement
@@ -74,7 +74,7 @@ const MapComponent = () => {
             
           
         </ReactMapGL>  
-      </>
+      </div>
     );
 }
 

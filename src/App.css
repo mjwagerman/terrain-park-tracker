@@ -4,11 +4,6 @@ html, body, #root {
   padding: 0;
 }
 
-.app-container {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
 
 .header {
   height: 60px;
@@ -16,11 +11,16 @@ html, body, #root {
 }
 
 .map-container {
+  flex: 1;
+  height: 70vh;
+  padding: 2rem;
+}
 
-  height: 80%;
-  padding-left: 2rem;
-  padding-right: 2rem;
-  padding-bottom: 2rem;
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
 
 .marker-btn {
@@ -33,10 +33,10 @@ html, body, #root {
   width: 30px;
 }
 
-.react-map-gl {
-  height:30%;
+.popup-img {
+  height: 140px;
 }
 
-.popup-img {
-  height: 250px;
+.input-resort {
+  font-size: 20px;
 }
