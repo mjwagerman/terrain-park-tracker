@@ -1,9 +1,18 @@
 import { auth, googleProvider } from "../config/firebase";
-import { useState } from "react";
-import { signInWithPopup, signOut } from "firebase/auth";
+import { useState, useEffect } from "react";
+import { signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth";
 
 
 const Auth = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setIsLoggedIn(!!user); // Set isLoggedIn to true if user exists, otherwise false
+    });
+    return unsubscribe;
+  }, []);
+
     const signInWithGoogle = async () => {
       try {
         await signInWithPopup(auth, googleProvider);
@@ -22,9 +31,12 @@ const Auth = () => {
     };
   
     return (
-      <div className = "google-auth">
-        <button onClick={signInWithGoogle}> Sign In With Google</button>
-        <button onClick={logout}> Logout </button>
+      <div className="auth">
+        {!isLoggedIn ? (
+        <button onClick={signInWithGoogle} className="log-in-btn"> Sign In With Google</button>
+      ) : (
+        <button onClick={logout} className="log-out-btn"> Logout </button>
+      )}
       </div>
     );
   };

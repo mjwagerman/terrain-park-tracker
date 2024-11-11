@@ -8,6 +8,56 @@ html, body, #root {
 .header {
   height: 60px;
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+  background-color: #f1f1f1;
+  justify-content: space-between;
+}
+
+
+.logo-img {
+  height: 40px;
+  margin-right: 10px;
+}
+
+.auth {
+  margin-left: auto; /* Ensures auth component aligns to the far right */
+  display: flex;
+  gap: 10px; /* Adds space between buttons */
+}
+
+.header h1 {
+  flex-grow: 1;
+  margin: 0;
+}
+
+.auth .log-in-btn, .log-out-btn {
+  cursor: pointer;
+  outline: 0;
+  color: #fff;
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+  display: inline-block;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: center;
+  border: 1px solid transparent;
+  padding: 6px 12px;
+  font-size: 16px;
+  border-radius: .25rem;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  :hover {
+      color: #fff;
+      background-color: #0b5ed7;
+      border-color: #0a58ca;
+  }
+}
+
+.auth .log-in-btn:hover, .log-out-btn:hover {
+  color: #fff;
+  background-color: #0b5ed7;
+  border-color: #0a58ca;
 }
 
 .map-container {
