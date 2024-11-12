@@ -7,10 +7,10 @@ import SearchComponent from '../components/SearchComponent';
 
 export default function HomeScreen() {
   return (
-    <div>
+    <div className ="home-screen">
+        <SearchComponent />
         <MapComponent />
         <InputResort />
-        <SearchComponent />
     </div>
   )
 }

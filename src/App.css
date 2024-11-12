@@ -24,6 +24,7 @@ html, body, #root {
   background-color: #eeeded;
   padding-left:10px;
   padding-right:10px;
+  margin-bottom: 10px;
 }
 
 .header-links {
@@ -93,6 +94,59 @@ html, body, #root {
   color: #fff;
   background-color: #0b5ed7;
   border-color: #0a58ca;
+}
+
+.search-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+}
+
+/* SEARCH BOX */
+
+.search-box input[type="text"] {
+  width: 100%; /* Set this to a fixed width, e.g., width: 400px; */
+  max-width: 400px; /* Change this to adjust the size */
+  padding: 10px 15px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s;
+}
+
+.search-box input[type="text"]:focus {
+  border-color: #007bff;
+}
+
+.search-box ul {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0;
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.search-box ul h1 {
+  padding: 10px;
+  font-size: 16px;
+  color: #333;
+  margin: 0;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.search-box ul h1:hover {
+  background-color: #f1f1f1;
+}
+
+.search-box ul h1 + h1 {
+  border-top: 1px solid #eee;
 }
 
 .map-container {

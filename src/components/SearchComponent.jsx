@@ -34,11 +34,15 @@ export default function SearchComponent() {
 
     
     return (
-        <div>
+        <div className = "search-box">
             <input type="text" onChange={e=> setQuery (e.target.value)} />
-            <ul>
-                {filteredResorts.map(value => <h1 key={value.name}>{value.name}</h1>)}
-            </ul>
+            {query && (
+                <ul>
+                    {filteredResorts.map(value => (
+                        <h1 key={value.name}>{value.name}</h1>
+                    ))}
+                </ul>
+            )}
         </div>
     )
 }
