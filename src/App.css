@@ -13,7 +13,18 @@ html, body, #root {
   overflow: hidden;
   background-color: #f1f1f1;
   justify-content: space-between;
+  padding: 10px;
 }
+
+.header-link-home {
+  display: flex;
+  text-decoration: none;
+} 
+
+.header-link-resorts {
+  display: flex;
+  text-decoration: none;
+} 
 
 
 .logo-img {
