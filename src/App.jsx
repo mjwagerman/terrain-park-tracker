@@ -7,6 +7,7 @@ import NotFoundPage from './pages/NotFoundPage.jsx'
 import ResortsPage from './pages/ResortsPage.jsx';
 import ResortPage from './pages/ResortPage.jsx';
 import Header from './components/Header.jsx';
+import AboutPage from './pages/AboutPage.jsx';
 
 
 
@@ -28,11 +29,28 @@ const router = createBrowserRouter([
   },
   {
     path: '/resorts',
-    element: < ResortsPage/>,
+    element: 
+    <>
+      <Header />
+      <ResortsPage/>
+    </>
   },
   {
     path: '/resorts/:resort',
-    element: <ResortPage />,
+    element: 
+    <>
+      <Header />
+      <ResortPage />
+    </>
+      
+  },
+  {
+    path: '/about',
+    element:
+    <>
+      <Header />
+      <AboutPage />
+    </>
   }
 ]);
 
