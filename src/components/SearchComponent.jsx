@@ -35,7 +35,7 @@ export default function SearchComponent() {
     
     return (
         <div className = "search-box">
-            <input type="text" onChange={e=> setQuery (e.target.value)} />
+            <input type="text" placeholder="Search resorts..." onChange={e=> setQuery (e.target.value)} />
             {query && (
                 <ul>
                     {filteredResorts.map(value => (
