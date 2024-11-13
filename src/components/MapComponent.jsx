@@ -8,7 +8,9 @@ import PopupComponent from "./PopupComponent";
 import snowflake from '../assets/snowflake.png';
 
 
-const MapComponent = () => {
+const MapComponent = ( { searchSelectedResort }) => {
+
+
     const [viewport, setViewport] = useState({
         latitude: 40,
         longitude: -112.1332,
@@ -19,7 +21,7 @@ const MapComponent = () => {
 
 
     const[resortList, setResortList] = useState([]);
-    const [selectedResort, setSelectedResort] = useState(null);
+    const [selectedPopupResort, setSelectedPopupResort] = useState(null);
 
     useEffect(() => {
       const fetchResorts = async() => {
@@ -32,6 +34,20 @@ const MapComponent = () => {
       };
       fetchResorts();
     }, []);
+
+    useEffect(() => {
+      if (searchSelectedResort) {
+        console.log("centering map");
+          setViewport((prevViewport) => ({
+              ...prevViewport,
+              latitude: searchSelectedResort.location.latitude,
+              longitude: searchSelectedResort.location.longitude,
+              zoom: 10,
+          }));
+          // setSearchFocusedResort(searchSelectedResort);
+          setSelectedPopupResort(searchSelectedResort); // Show popup if desired
+      }
+  }, [searchSelectedResort]);
 
     return (
       <div className = "map-container"> 
@@ -56,7 +72,7 @@ const MapComponent = () => {
             <button 
               className = "marker-btn" 
               onClick={() => {
-                setSelectedResort(resort);
+                setSelectedPopupResort(resort);
               }}
             >
                 <img src={resort.favicon} alt = "Logo"/>
@@ -65,10 +81,10 @@ const MapComponent = () => {
           ))}
 
 
-            {selectedResort && ( 
+            {selectedPopupResort && ( 
               <PopupComponent 
-                resort = {selectedResort}
-                onClose={() => setSelectedResort(null)} 
+                resort = {selectedPopupResort}
+                onClose={() => setSelectedPopupResort(null)} 
               />
             )}
             

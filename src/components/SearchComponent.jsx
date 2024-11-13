@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState,useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 
 import { getResorts } from "../services/getResorts";
 
@@ -11,12 +11,12 @@ const getFilteredResorts = (query, resorts) => {
     return resorts.filter((resort) => resort.name.toLowerCase().includes(query.toLowerCase()));
 }
 
-export default function SearchComponent() {
+export default function SearchComponent( { onResortSelect }) {
 
-    const [query, setQuery] = useState("");
-    
-
+    const[query, setQuery] = useState("");
     const[resortList, setResortList] = useState([]);  
+
+
     useEffect(() => {
         const fetchResorts = async() => {
           try {
@@ -29,7 +29,7 @@ export default function SearchComponent() {
         fetchResorts();
       }, []);
 
-      const filteredResorts = getFilteredResorts(query, resortList);
+      const filteredResorts = useMemo(() => getFilteredResorts(query, resortList), [query,]);
     
 
     
@@ -39,7 +39,9 @@ export default function SearchComponent() {
             {query && (
                 <ul>
                     {filteredResorts.map(value => (
-                        <h1 key={value.name}>{value.name}</h1>
+                        <li key={value.name} onClick={() => onResortSelect(value)}>
+                            {value.name}
+                        </li>
                     ))}
                 </ul>
             )}

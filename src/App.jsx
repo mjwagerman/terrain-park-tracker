@@ -29,28 +29,15 @@ const router = createBrowserRouter([
   },
   {
     path: '/resorts',
-    element: 
-    <>
-      <Header />
-      <ResortsPage/>
-    </>
+    element: < ResortsPage/>,
   },
   {
     path: '/resorts/:resort',
-    element: 
-    <>
-      <Header />
-      <ResortPage />
-    </>
-      
+    element: <ResortPage />,
   },
   {
     path: '/about',
-    element:
-    <>
-      <Header />
-      <AboutPage />
-    </>
+    element: <AboutPage />
   }
 ]);
 
