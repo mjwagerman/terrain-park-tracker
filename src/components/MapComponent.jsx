@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 
 import { getResorts } from "../services/getResorts";
@@ -22,6 +22,7 @@ const MapComponent = ( { searchSelectedResort }) => {
 
     const[resortList, setResortList] = useState([]);
     const [selectedPopupResort, setSelectedPopupResort] = useState(null);
+    const [isOverlayVisible, setIsOverlayVisible] = useState(true);
 
     useEffect(() => {
       const fetchResorts = async() => {
@@ -49,18 +50,33 @@ const MapComponent = ( { searchSelectedResort }) => {
       }
   }, [searchSelectedResort]);
 
+  const handleOverlayClick = () => {
+    console.log("Overlay button clicked!");
+    setIsOverlayVisible(false);
+  };
+
     return (
-      <div className = "map-container"> 
+      <div className = "map-container">
+
+
+        {isOverlayVisible && (
+                <button 
+                    className="map-button-overlay" 
+                    onClick={handleOverlayClick}
+                >
+                    Click to interact
+                </button>
+        )} 
         <ReactMapGL 
         {...viewport}
         mapboxAccessToken={import.meta.env.VITE_MAPBOX_TOKEN}
         mapStyle="mapbox://styles/mapbox/standard"
         onMove={evt => { setViewport(evt.viewState);}} //update viewport on any movement
-        scrollZoom={true}
-        dragPan={true}
-        dragRotate={true}
+        scrollZoom={!isOverlayVisible}
+        dragPan={!isOverlayVisible}
+        dragRotate={!isOverlayVisible}
         doubleClickZoom={false}
-        touchZoomRotate={true}
+        touchZoomRotate={!isOverlayVisible}
         projection="globe"
         >
         {/* add ID as marker key below */}

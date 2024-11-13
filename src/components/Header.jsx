@@ -1,6 +1,6 @@
 import Auth from './Auth';
 import { Link } from "react-router-dom";
-
+import pinimg from '../assets/mappin.png';
 
 
 const Header = () => {
@@ -10,7 +10,7 @@ const Header = () => {
         <div className="header-wrapper" >
           <div className="header-links">
             <Link to="/" className="header-link-home">
-              <img src="./src/assets/mappin.png" alt="logo" className="logo-img"></img>
+              <img src={pinimg} alt="logo" className="logo-img"></img>
               <h1>TerrainParkTracker</h1> 
             </Link>
             <nav className="header-nav-list">

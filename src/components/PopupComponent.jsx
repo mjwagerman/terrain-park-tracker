@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 const PopupComponent = ({ resort, onClose }) => {
     return (
       <Popup
+        className="map-popup"
         anchor="top"
         latitude={resort.location.latitude}
         longitude={resort.location.longitude}

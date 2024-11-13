@@ -22,9 +22,9 @@ html, body, #root {
   align-items: center;
   flex-wrap: wrap;
   background-color: #eeeded;
-  padding-left:10px;
-  padding-right:10px;
-  margin-bottom: 10px;
+  padding-left:1rem;
+  padding-right:1rem;
+  margin-bottom: 1rem;
 }
 
 .header-links {
@@ -39,7 +39,6 @@ html, body, #root {
   align-items: center;
   text-decoration: none;
   color: #000000;
-  /* padding:10px; */
 } 
 
 .header-nav-list {
@@ -164,6 +163,119 @@ html, body, #root {
   position: relative; /* Allows other content to overlay if needed */
   z-index: 0;
 }
+
+.map-button-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 1.5rem;
+  font-family: "Poppins", sans-serif;
+  border: none;
+  cursor: pointer;
+  z-index: 1000; /* High z-index to ensure it appears above the map */
+}
+
+
+.map-popup {
+  font-family: "Poppins", sans-serif;
+  width: 280px;
+  max-width: 100%;
+  padding: 1rem;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  text-align: left;
+}
+
+.map-popup h1 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+  color: #333;
+}
+
+.map-popup p {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #555;
+  margin: 0 0 1rem;
+}
+
+.map-popup .popup-img {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.map-popup a {
+  display: inline-block;
+  font-size: 0.9rem;
+  color: #007bff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.map-popup a:hover {
+  color: #0056b3;
+}
+
+.input-resort {
+  font-family: "Poppins", sans-serif;
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.input-resort p {
+  font-size: 1rem;
+  color: #333;
+  margin: 0 0 1rem;
+}
+
+.input-resort input {
+  width: 100%;
+  max-width: 300px;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s ease;
+}
+
+.input-resort input:focus {
+  border-color: #007bff;
+}
+
+.input-resort button {
+  font-size: 1rem;
+  margin-top: 1rem;
+  padding: 10px 20px;
+  color: #ffffff;
+  background-color: #0d6efd;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.input-resort button:hover {
+  background-color: #0b5ed7;
+}
+
 
 
 .app-container {
