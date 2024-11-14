@@ -11,7 +11,7 @@ export default function ResortSearchSelector() {
     };
 
     return (
-        <div>
+        <div className = "map-search-combo-container">
             <SearchComponent onResortSelect={ handleResortSelect } />
             <MapComponent searchSelectedResort={ searchSelectedResort } />
         </div>

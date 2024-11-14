@@ -15,7 +15,7 @@ export default function SearchComponent( { onResortSelect }) {
 
     const[query, setQuery] = useState("");
     const[resortList, setResortList] = useState([]);  
-
+    const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
     useEffect(() => {
         const fetchResorts = async() => {
@@ -30,18 +30,33 @@ export default function SearchComponent( { onResortSelect }) {
       }, []);
 
       const filteredResorts = useMemo(() => getFilteredResorts(query, resortList), [query,]);
-    
+      
 
     
     return (
         <div className = "search-box">
-            <input type="text" placeholder="Search resorts..." onChange={e=> setQuery (e.target.value)} />
-            {query && (
+            <input
+             type="text" 
+             placeholder="Search resorts..." 
+             value={query}
+             onChange={e=> {
+                setQuery (e.target.value);
+                setIsDropdownVisible(true);
+            } }
+            />
+            {isDropdownVisible && query && (
                 <ul>
                     {filteredResorts.map(value => (
-                        <li key={value.name} onClick={() => onResortSelect(value)}>
+                        <h1 
+                        key={value.name} 
+                        onClick={() => {
+                            onResortSelect(value);
+                            setIsDropdownVisible(false);
+                            setQuery(value.name);
+                        }}
+                        >
                             {value.name}
-                        </li>
+                        </h1>
                     ))}
                 </ul>
             )}

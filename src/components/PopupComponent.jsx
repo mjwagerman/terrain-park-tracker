@@ -8,6 +8,7 @@ const PopupComponent = ({ resort, onClose }) => {
       <Popup
         className="map-popup"
         anchor="top"
+        offset={{ top: [0, 15] }}
         latitude={resort.location.latitude}
         longitude={resort.location.longitude}
         closeOnClick={false}

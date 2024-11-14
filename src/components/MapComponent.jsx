@@ -10,6 +10,7 @@ import snowflake from '../assets/snowflake.png';
 
 const MapComponent = ( { searchSelectedResort }) => {
 
+    const mapRef = useRef(null);
 
     const [viewport, setViewport] = useState({
         latitude: 40,
@@ -36,26 +37,39 @@ const MapComponent = ( { searchSelectedResort }) => {
       fetchResorts();
     }, []);
 
-    useEffect(() => {
-      if (searchSelectedResort) {
-        console.log("centering map");
-          setViewport((prevViewport) => ({
-              ...prevViewport,
-              latitude: searchSelectedResort.location.latitude,
-              longitude: searchSelectedResort.location.longitude,
-              zoom: 10,
-          }));
-          // setSearchFocusedResort(searchSelectedResort);
-          setSelectedPopupResort(searchSelectedResort); // Show popup if desired
-      }
-  }, [searchSelectedResort]);
+  useEffect(() => {
+    if (searchSelectedResort && mapRef.current) {
+        mapRef.current.flyTo({
+            center: [searchSelectedResort.location.longitude, searchSelectedResort.location.latitude - 0.09],
+            zoom: 10,
+            essential: true // This makes sure the animation is always shown
+        });
+        setSelectedPopupResort(searchSelectedResort);
+        setIsOverlayVisible(false);
+    }
+}, [searchSelectedResort]);
 
   const handleOverlayClick = () => {
     setIsOverlayVisible(false);
   };
 
+  const handleMarkerClick = (resort) => {
+    setSelectedPopupResort(resort);
+    if (mapRef.current) {
+        mapRef.current.flyTo({
+            center: [resort.location.longitude, resort.location.latitude - 0.09],
+            zoom: 10,
+            essential: true
+        });
+    }
+    setIsOverlayVisible(false);
+};
+
   const handleMouseLeave = () => {
-    setTimeout(() => setIsOverlayVisible(true), 300);
+    setTimeout(() => {
+      setIsOverlayVisible(true);
+      setSelectedPopupResort(null);
+    }, 300);
   }
 
     return (
@@ -67,11 +81,12 @@ const MapComponent = ( { searchSelectedResort }) => {
                     className="map-button-overlay" 
                     onClick={handleOverlayClick}
                 >
-                    Click to interact
+                  Click to interact
                 </button>
         )} 
         <ReactMapGL 
         {...viewport}
+        ref={mapRef}
         mapboxAccessToken={import.meta.env.VITE_MAPBOX_TOKEN}
         mapStyle="mapbox://styles/mapbox/standard"
         onMove={evt => { setViewport(evt.viewState);}} //update viewport on any movement
@@ -91,7 +106,8 @@ const MapComponent = ( { searchSelectedResort }) => {
             <button 
               className = "marker-btn" 
               onClick={() => {
-                setSelectedPopupResort(resort);
+                // setSelectedPopupResort(resort);
+                handleMarkerClick(resort);
               }}
             >
                 <img src={resort.favicon} alt = "Logo"/>
@@ -100,7 +116,7 @@ const MapComponent = ( { searchSelectedResort }) => {
           ))}
 
 
-            {selectedPopupResort && ( 
+            {selectedPopupResort && !isOverlayVisible && ( 
               <PopupComponent 
                 resort = {selectedPopupResort}
                 onClose={() => setSelectedPopupResort(null)} 

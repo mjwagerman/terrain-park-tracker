@@ -7,13 +7,11 @@ html, body, #root {
   font-family: "Poppins", sans-serif;
 }
 
-
-.header {
-  /* height: 60px; */
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  /* overflow: hidden; */
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000; /* Keeps header above other content */
 }
 
 .header-wrapper {
@@ -22,9 +20,23 @@ html, body, #root {
   align-items: center;
   flex-wrap: wrap;
   background-color: #eeeded;
-  padding-left:1rem;
-  padding-right:1rem;
+  padding: 20px 1rem; /* Initial padding */
   margin-bottom: 1rem;
+  transition: padding 0.3s ease, font-size 0.3s ease;
+}
+
+.header-wrapper.shrink {
+  padding: 10px 1rem; /* Reduced padding when shrunk */
+  font-size: 0.9em; /* Adjust font size if needed */
+}
+
+.header-wrapper h1 {
+  font-size: 1.5rem; /* Default font size */
+  transition: font-size 0.3s ease; /* Smooth transition */
+}
+
+.header-wrapper.shrink h1 {
+  font-size: 1.2rem; /* Smaller font size in shrunk state */
 }
 
 .header-links {
@@ -40,6 +52,7 @@ html, body, #root {
   text-decoration: none;
   color: #000000;
 } 
+
 
 .header-nav-list {
   display: flex;
@@ -97,12 +110,25 @@ html, body, #root {
 
 .search-box {
   display: flex;
+  position: fixed;
+  top: calc(70px + 1rem);
   flex-direction: column;
   justify-content: center;
   align-items: center; 
   position: relative;
   z-index: 10;
+  margin-top: 120px;
 }
+/* position: fixed;
+    top: calc(70px + 1rem);
+    left: 0;
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 900;
+    transition: top 0.3s ease;  */
 
 .search-box input[type="text"] {
   width: 100%; /* Set this to a fixed width, e.g., width: 400px; */
@@ -171,6 +197,10 @@ html, body, #root {
   position: relative;
 }
 
+.map-search-combo-container {
+  /* margin: 0; */
+}
+
 .map-button-overlay {
   position: absolute;
   top: 2rem; /* Matches the container's padding */
@@ -187,7 +217,7 @@ html, body, #root {
   font-family: "Poppins", sans-serif;
   border: none;
   cursor: pointer;
-  z-index: 1000; /* High z-index to ensure it appears above the map */
+  z-index: 999; /* High z-index to ensure it appears above the map */
   opacity: 1; /* Visible by default */
   transition: background-color 0.3s ease, opacity 0.3s ease;
 }
