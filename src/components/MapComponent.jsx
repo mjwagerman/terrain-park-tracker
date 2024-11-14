@@ -51,13 +51,16 @@ const MapComponent = ( { searchSelectedResort }) => {
   }, [searchSelectedResort]);
 
   const handleOverlayClick = () => {
-    console.log("Overlay button clicked!");
     setIsOverlayVisible(false);
   };
 
-    return (
-      <div className = "map-container">
+  const handleMouseLeave = () => {
+    setTimeout(() => setIsOverlayVisible(true), 300);
+  }
 
+    return (
+      <div className = "map-container" onMouseLeave={handleMouseLeave}>
+        <div className="map-content">
 
         {isOverlayVisible && (
                 <button 
@@ -106,6 +109,7 @@ const MapComponent = ( { searchSelectedResort }) => {
             
           
         </ReactMapGL>  
+        </div>
       </div>
     );
 }

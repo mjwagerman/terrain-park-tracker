@@ -104,8 +104,6 @@ html, body, #root {
   z-index: 10;
 }
 
-/* SEARCH BOX */
-
 .search-box input[type="text"] {
   width: 100%; /* Set this to a fixed width, e.g., width: 400px; */
   max-width: 400px; /* Change this to adjust the size */
@@ -159,17 +157,27 @@ html, body, #root {
 .map-container {
   flex: 1;
   height: 70vh;
-  padding: 2rem;
+  padding-top: 2rem;
+  padding-left: 4rem;
+  padding-right: 4rem;
   position: relative; /* Allows other content to overlay if needed */
   z-index: 0;
+  overflow: hidden;
+}
+
+.map-content {
+  width: 100%;
+  height: 100%;
+  position: relative;
 }
 
 .map-button-overlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 2rem; /* Matches the container's padding */
+  left: 2rem;
+  right: 2rem;
+  bottom: 2rem;
+  inset: 0;
   background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent overlay */
   display: flex;
   justify-content: center;
@@ -180,8 +188,18 @@ html, body, #root {
   border: none;
   cursor: pointer;
   z-index: 1000; /* High z-index to ensure it appears above the map */
+  opacity: 1; /* Visible by default */
+  transition: background-color 0.3s ease, opacity 0.3s ease;
 }
 
+.map-button-overlay.hidden {
+  opacity: 0; /* Hides overlay smoothly */
+  pointer-events: none; /* Disables interaction when hidden */
+}
+
+.map-button-overlay:hover {
+  background-color: rgba(0, 0, 0, 0.6); /* Darker overlay on hover */
+}
 
 .map-popup {
   font-family: "Poppins", sans-serif;
