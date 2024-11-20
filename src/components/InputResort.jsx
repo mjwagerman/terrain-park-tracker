@@ -60,7 +60,7 @@ const InputResort = () => {
     const onSubmitResort = async () => {
         try {
             localStorage.setItem('savedResortInput', typedResortInput); 
-            setNewResortWebsite(typedResortInput);
+            // setNewResortWebsite(typedResortInput);
             //call the backend to puppeteer the url and return the info i want
         // const response = await Axios.get(`http://127.0.0.1:5001/terrain-park-tracker/us-central1/api/scrape?siteUrl=${newResortWebsite}`)
 
