@@ -6,9 +6,10 @@ import { getResorts } from "../services/getResorts";
 import PopupComponent from "./PopupComponent";
 
 import snowflake from '../assets/snowflake.png';
+import useFetchResorts from '../hooks/useFetchResorts';
 
 
-const MapComponent = ( { searchSelectedResort }) => {
+const MapComponent = ( { searchSelectedResort, setSearchSelectedResort, isOverlayVisible }) => {
 
     const mapRef = useRef(null);
 
@@ -19,23 +20,9 @@ const MapComponent = ( { searchSelectedResort }) => {
         width: '100%',
         height: '100%',
     });
+   // const [selectedPopupResort, setSelectedPopupResort] = useState(null);
 
-
-    const[resortList, setResortList] = useState([]);
-    const [selectedPopupResort, setSelectedPopupResort] = useState(null);
-    const [isOverlayVisible, setIsOverlayVisible] = useState(true);
-
-    useEffect(() => {
-      const fetchResorts = async() => {
-        try {
-          const resorts = await getResorts();
-          setResortList(resorts);
-        } catch (err) {
-          console.error(err)
-        }
-      };
-      fetchResorts();
-    }, []);
+   const resortList = useFetchResorts();
 
   useEffect(() => {
     if (searchSelectedResort && mapRef.current) {
@@ -44,17 +31,19 @@ const MapComponent = ( { searchSelectedResort }) => {
             zoom: 10,
             essential: true // This makes sure the animation is always shown
         });
-        setSelectedPopupResort(searchSelectedResort);
-        setIsOverlayVisible(false);
+        // setSelectedPopupResort(searchSelectedResort);
     }
 }, [searchSelectedResort]);
 
-  const handleOverlayClick = () => {
-    setIsOverlayVisible(false);
-  };
+  useEffect(() => {
+    if(isOverlayVisible) {
+      setSearchSelectedResort(null);
+    }
+  }, [isOverlayVisible, setSearchSelectedResort]);
 
   const handleMarkerClick = (resort) => {
-    setSelectedPopupResort(resort);
+    // setSelectedPopupResort(resort);
+    setSearchSelectedResort(resort);
     if (mapRef.current) {
         mapRef.current.flyTo({
             center: [resort.location.longitude, resort.location.latitude - 0.09],
@@ -62,24 +51,24 @@ const MapComponent = ( { searchSelectedResort }) => {
             essential: true
         });
     }
-    setIsOverlayVisible(false);
+  //  setIsOverlayVisible(false);
 };
 
-  const handleMouseLeave = () => {
+ /* const handleMouseLeave = () => {
     setTimeout(() => {
       setIsOverlayVisible(true);
       setSelectedPopupResort(null);
     }, 300);
-  }
+  } */
 
     return (
-      <div className = "map-container" onMouseLeave={handleMouseLeave}>
+      <div className = "map-container">
         <div className="map-content">
 
         {isOverlayVisible && (
                 <button 
                     className="map-button-overlay" 
-                    onClick={handleOverlayClick}
+                    //  onClick={() => setIsOverlayVisible(false)}
                 >
                   Click to interact
                 </button>
@@ -116,10 +105,10 @@ const MapComponent = ( { searchSelectedResort }) => {
           ))}
 
 
-            {selectedPopupResort && !isOverlayVisible && ( 
+            {searchSelectedResort && !isOverlayVisible && ( 
               <PopupComponent 
-                resort = {selectedPopupResort}
-                onClose={() => setSelectedPopupResort(null)} 
+                resort = {searchSelectedResort}
+                onClose={() => setSearchSelectedResort(null)} 
               />
             )}
             

@@ -1,18 +1,17 @@
 import React from 'react'
 
-import Header from '../components/Header';
-import MapComponent from '../components/MapComponent';
 import InputResort from '../components/InputResort';
-import SearchComponent from '../components/SearchComponent';
 import SearchResortSelector from '../components/ResortSearchSelector';
+import ResortsPage from './ResortsPage.jsx'
 
 export default function HomeScreen() {
   return (
     <div>
-        {/* <SearchComponent />
-        <MapComponent /> */}
         <SearchResortSelector />
         <InputResort />
+        <div id="resorts-section">
+          <ResortsPage />
+        </div>
     </div>
   )
 }

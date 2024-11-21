@@ -78,7 +78,7 @@ exports.scrapeTitle = onRequest(
                         messages: [
                             {
                                 role: "user",
-                                content: `Extract the name/title of the ski resort from the website title, and an image source link. Use the alt text to get an image related to ski or snowboard. In the format of Title: and ImageSrc: ${html}`,
+                                content: `Extract the ski resort's name from the website title and an image source link with alt text related to skiing or snowboarding. Also, include a basic non wordy one-sentence description for advanced freestyle skiers. Format: Title:, ImageSrc:, Description: ${html}`,
                             },
                         ],
                     });
@@ -86,14 +86,13 @@ exports.scrapeTitle = onRequest(
                     const extractedData = response.choices[0].message.content;
                     const title = (extractedData.match(/Title:\s*(.*)/i) || [])[1]?.trim() || "";
                     const imageSrc = (extractedData.match(/ImageSrc:\s*(https?:\/\/[^\s]+)/i) || [])[1]?.trim() || "";
+                    const description = (extractedData.match(/Description:\s*(.*)/i) || [])[1]?.trim() || "";
 
-                    data = { title, imageSrc, favicon };
+                    data = { title, imageSrc, favicon, description };
                 } catch (error) {
                     logger.error("Error fetching result from OpenAI:", error);
-                    return { title: "", imageSrc: "", favicon: ""};
+                    return { title: "", imageSrc: "", favicon: "", description: ""};
                 }
-
-
                 // Return the response
                 res.status(200).json(data);
             } catch (error) {

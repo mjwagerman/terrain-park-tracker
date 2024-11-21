@@ -24,6 +24,15 @@ const Header = () => {
     };
   }, []);
 
+  const handleScrollToResorts = (e) => {
+    e.preventDefault();
+    const resortsSection = document.getElementById('resorts-section');
+    if (resortsSection) {
+      resortsSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+
     return (
       <header>
         <div className={`header-wrapper ${isShrunk ? 'shrink' : ''}`} >
@@ -33,9 +42,13 @@ const Header = () => {
               <h1>TerrainParkTracker</h1> 
             </Link>
             <nav className="header-nav-list">
-              <Link to="/resorts" className="header-link-resorts">
+              {/* <Link to="/resorts" className="header-link-resorts">
                 Resorts
-              </Link>
+              </Link> */}
+              <a href="#resorts-section" onClick={handleScrollToResorts} className="header-link-resorts">
+                Resorts
+              </a>
+            
               <Link to="/about" className="header-link-about">
                 About
               </Link>
