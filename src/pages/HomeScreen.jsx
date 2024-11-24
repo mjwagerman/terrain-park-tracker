@@ -8,10 +8,10 @@ export default function HomeScreen() {
   return (
     <div>
         <SearchResortSelector />
-        <InputResort />
         <div id="resorts-section">
           <ResortsPage />
         </div>
+        <InputResort />
     </div>
   )
 }

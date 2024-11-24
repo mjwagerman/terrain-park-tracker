@@ -367,7 +367,7 @@ header {
   gap: 20px; /* Adds space between items */
 }
 
-.resort-card {
+.resortCard-card {
   display: flex;
   flex-direction: column; /* Stacks content vertically */
   text-decoration: none;
@@ -380,44 +380,198 @@ header {
   width: 300px; /* Set a fixed width for each card */
 }
 
-.resort-card:hover {
+.resortCard-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-.resort-image-wrapper {
+.resortCard-image-wrapper {
   height: 150px; /* Fixed height for images */
   overflow: hidden;
 }
 
-.resort-image {
+.resortCard-image {
   width: 100%;
   height: 100%;
   object-fit: cover; /* Ensures image scales properly */
   transition: transform 0.3s;
 }
 
-.resort-card:hover .resort-image {
+.resortCard-card:hover .resortCard-image {
   transform: scale(1.1);
 }
 
-.resort-details {
+.resortCard-details {
   padding: 15px;
   text-align: left;
 }
 
-.resort-name {
+.resortCard-name {
   font-size: 1.25rem;
   margin: 0 0 10px;
 }
 
-.resort-location {
+.resortCard-location {
   font-size: 0.9rem;
   color: #555;
   margin: 0 0 10px;
 }
 
-.resort-description {
+.resortCard-description {
   font-size: 0.85rem;
   color: #777;
 }
+
+.resort-page-container {
+  padding: 2rem;
+  margin: auto;
+  margin-top: 70px;
+  max-width: 1200px;
+  display: flex; /* Use flexbox for side-by-side layout */
+  gap: 2rem; /* Add spacing between map and park list */
+  align-items: flex-start; /* Align items at the top */
+}
+
+.resort-map-container {
+  flex: 2; /* Allocate more space to the map section */
+}
+
+.resortPage-park-list {
+  flex: 1; /* Allocate less space to the park list */
+  background-color: #f9f9f9; /* Optional: Add a background for better contrast */
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.park-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.park-list-item {
+  padding: 0.5rem;
+  font-size: 1rem;
+  color: #444;
+  border-bottom: 1px solid #ddd;
+}
+
+.resortPage-image {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.resortPage-park-list {
+  margin-top: 2rem;
+}
+
+.park-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.park-list-item {
+  padding: 0.5rem;
+  font-size: 1rem;
+  color: #444;
+  border-bottom: 1px solid #ddd;
+}
+
+.photo-gallery-container {
+  padding: 2rem;
+  background-color: #f9f9f9;
+  margin-top: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.photo-gallery-title {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.photo-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
+.gallery-photo {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+}
+
+.gallery-photo:hover {
+  transform: scale(1.05);
+}
+
+.youtube-embed-container {
+  margin-top: 2rem;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.youtube-videos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.youtube-video {
+  width: 100%;
+  border-radius: 10px;
+  border: none;
+}
+
+.youtube-video-error {
+  color: #ff4d4d;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.resortPage-image {
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+  border-radius: 10px;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  position: relative;
+  max-width: 90%;
+  max-height: 90%;
+}
+
+.modal-image {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  cursor: zoom-in; /* Indicates zoomable content */
+}
+
+.modal:active .modal-image {
+  cursor: zoom-out; /* Indicates zoom-out action */
+}
+
+
