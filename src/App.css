@@ -425,7 +425,7 @@ header {
 .resort-page-container {
   padding: 2rem;
   margin: auto;
-  margin-top: 70px;
+  margin-top: 4.5rem;
   max-width: 1200px;
   display: flex; /* Use flexbox for side-by-side layout */
   gap: 2rem; /* Add spacing between map and park list */
@@ -433,14 +433,15 @@ header {
 }
 
 .resort-map-container {
-  flex: 2; /* Allocate more space to the map section */
+  flex: 3; /* Allocate more space to the map section */
 }
 
 .resortPage-park-list {
   flex: 1; /* Allocate less space to the park list */
   background-color: #f9f9f9; /* Optional: Add a background for better contrast */
   padding: 1rem;
-  border-radius: 10px;
+  /* border-radius: 10px; */
+  margin-top:10rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -574,4 +575,51 @@ header {
   cursor: zoom-out; /* Indicates zoom-out action */
 }
 
+.about-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  max-width: 1200px;
+  margin-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+}
 
+.about-text-content {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.about-text-content h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.about-text-content p {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.about-text-content a {
+  font-size: 1rem;
+  color: #007bff;
+  text-decoration: none;
+}
+
+.about-text-content a:hover {
+  text-decoration: underline;
+}
+
+.about-image-content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.about-image-content img {
+  max-width: 78%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}

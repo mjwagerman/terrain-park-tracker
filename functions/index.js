@@ -9,16 +9,14 @@ const OpenAI = require("openai");
 
 
 let openai;
-
-// Define the Firebase HTTP function
 exports.scrapeTitle = onRequest(
     {
         secrets: ["OPENAI_API_KEYY"],
-        memory: '1GiB' // Increase if you encounter memory issues
+        memory: '1GiB',
+        timeoutSeconds: 400
     },
     (req, res) => {
         cors(req, res, async () => {
-            // Check if URL parameter is provided
             const { url } = req.query;
             if (!url) {
                 res.status(400).send("Missing URL parameter");
@@ -26,7 +24,7 @@ exports.scrapeTitle = onRequest(
             }
 
             openai = new OpenAI({
-                apiKey: process.env.OPENAI_API_KEYY, // Use the secret
+                apiKey: process.env.OPENAI_API_KEYY, 
             });
 
             try {
@@ -78,7 +76,11 @@ exports.scrapeTitle = onRequest(
                         messages: [
                             {
                                 role: "user",
-                                content: `Extract the ski resort's name from the website title and an image source link with alt text related to skiing or snowboarding. Also, include a basic non wordy one-sentence description for advanced freestyle skiers. Format: Title:, ImageSrc:, Description: ${html}`,
+                                content: `Extract the ski resort's name from the website title and an image source link with alt text related to skiing or snowboarding. Include a basic non wordy one-sentence description for advanced freestyle skiers. Format: 
+                    Title:, 
+                    ImageSrc:, 
+                    Description:
+                    ${html}`,
                             },
                         ],
                     });
@@ -88,16 +90,17 @@ exports.scrapeTitle = onRequest(
                     const imageSrc = (extractedData.match(/ImageSrc:\s*(https?:\/\/[^\s]+)/i) || [])[1]?.trim() || "";
                     const description = (extractedData.match(/Description:\s*(.*)/i) || [])[1]?.trim() || "";
 
+
                     data = { title, imageSrc, favicon, description };
                 } catch (error) {
-                    logger.error("Error fetching result from OpenAI:", error);
+                    console.error("Error fetching result from OpenAI:", error);
                     return { title: "", imageSrc: "", favicon: "", description: ""};
                 }
                 // Return the response
                 res.status(200).json(data);
             } catch (error) {
                 // Log and return any errors
-                console.error("Error in scrapeTitle function:", error);
+                logger.error("Error in scrapeTitle function:", error);
                 res.status(500).send("Internal Server Error");
             }
         });
