@@ -1,12 +1,15 @@
 import { useState, useEffect } from 'react';
 import Auth from './Auth';
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import pinimg from '../assets/mappin.png';
 
 
 const Header = () => {
   
   const [isShrunk, setIsShrunk] = useState(false);
+
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,11 +29,24 @@ const Header = () => {
 
   const handleScrollToResorts = (e) => {
     e.preventDefault();
-    const resortsSection = document.getElementById('resorts-section');
-    if (resortsSection) {
-      resortsSection.scrollIntoView({ behavior: 'smooth' });
+  
+    if (location.pathname === "/") {
+      const resortsSection = document.getElementById("resorts-section");
+      if (resortsSection) {
+        resortsSection.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      navigate("/");
+      setTimeout(() => {
+        const resortsSection = document.getElementById("resorts-section");
+        if (resortsSection) {
+          resortsSection.scrollIntoView({ behavior: "smooth" });
+          console.log("made it");
+        }
+      }, 100); // Adjust delay as necessary
     }
   };
+  
 
 
     return (
@@ -42,7 +58,7 @@ const Header = () => {
               <h1>TerrainParkTracker</h1> 
             </Link>
             <nav className="header-nav-list">
-              {/* <Link to="/resorts" className="header-link-resorts">
+              {/* <Link to="/" className="header-link-resorts">
                 Resorts
               </Link> */}
               <a href="#resorts-section" onClick={handleScrollToResorts} className="header-link-resorts">
