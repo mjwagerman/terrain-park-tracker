@@ -11,7 +11,10 @@ export default function HomeScreen() {
         <div id="resorts-section">
           <ResortsPage />
         </div>
-        <InputResort />
+        <div id="input-section">
+          <InputResort />
+        </div>
+        
     </div>
   )
 }

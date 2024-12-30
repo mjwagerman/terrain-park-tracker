@@ -62,7 +62,7 @@ header {
   padding-right:10px;
 }
 
-.header-link-resorts, .header-link-about {
+.header-link-resorts, .header-link-about, .header-link-contribute {
   padding-left:10px;
   padding-right:10px;
   color: #000000;
@@ -350,7 +350,15 @@ header {
   font-size: 20px;
 }
 
+.resorts-section {
+  scroll-margin-top: 100px;
+  scroll-padding-top: 100px;
+  
+}
+
 .resorts-container {
+  scroll-margin-top: 100px;
+  scroll-padding-top: 100px;
   padding: 20px;
   text-align: center;
 }

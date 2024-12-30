@@ -28,6 +28,7 @@ const InputResort = () => {
     const [isLoading, setIsLoading] = useState(false); // Loading state
     const [confirmationMessage, setConfirmationMessage] = useState(""); // Confirmation message
     const functionUrl = 'https://scrapetitle-yifhgot6ma-uc.a.run.app/';
+    const defaultImg = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTq9oti0CaTQLp_ED6NDDWqrfXwi0dtw2MmKg&s';
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -51,10 +52,11 @@ const InputResort = () => {
             const { title, imageSrc, favicon, description } = response.data;
             const location = await getLocation(title);
 
+            let imageSent = imageSrc.length === 0 ? defaultImg : imageSrc;
             await addDoc(resortsCollectionRef, {
                 name: title,
                 website: typedResortInput,
-                photo: imageSrc,
+                photo: imageSent,
                 favicon,
                 location: new GeoPoint(location.latitude, location.longitude),
                 domain,
